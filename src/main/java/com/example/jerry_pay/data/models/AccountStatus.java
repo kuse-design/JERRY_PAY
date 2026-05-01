@@ -1,5 +1,5 @@
 package com.example.jerry_pay.data.models;
 
 public enum AccountStatus {
-    USPENDED, CLOSED
+    ACTIVE, SUSPENDED, CLOSED
 }
