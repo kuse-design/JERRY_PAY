@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class User {
 
     private Long id;
+    private String pin;
     private String name;
     private String email;
     private String phoneNumber;
