@@ -10,7 +10,7 @@ public class User {
 
     private Long id;
     private String pin;
-    private String name;
+    private String accountName;
     private String email;
     private String phoneNumber;
     private int age;
