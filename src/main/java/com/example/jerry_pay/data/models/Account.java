@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 @Document
 public class Account {
     private Long id;
-    private String pin;
     private String accountNumber;
     private BigDecimal balance;
     private AccountStatus status;
     private LocalDateTime createdAt;
+    private User user;
+
 
 }
