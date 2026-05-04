@@ -1,10 +1,12 @@
 package com.example.jerry_pay.services;
 
+import com.example.jerry_pay.data.models.Account;
 import com.example.jerry_pay.data.models.User;
 import com.example.jerry_pay.data.repositories.AccountRepository;
 import com.example.jerry_pay.data.repositories.UserRepository;
 import com.example.jerry_pay.dtos.request.CreateAccountRequest;
 import com.example.jerry_pay.dtos.response.AccountResponse;
+import com.example.jerry_pay.exception.userNotFoundException;
 import com.example.jerry_pay.utils.AccountNumberGenerator;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,10 @@ public class AccountService {
     }
 
     public AccountResponse CreateAccountRequest(CreateAccountRequest request){
-        User user = userRepository.findById(request.getid))
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new userNotFoundException("User not found");
+
+                Account account = new Account();
 
     }
 }
