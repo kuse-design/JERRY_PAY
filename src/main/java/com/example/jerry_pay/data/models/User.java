@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Document
 public class User {
 
-    private Long id;
+    private String id;
     private String pin;
     private String accountName;
     private String email;

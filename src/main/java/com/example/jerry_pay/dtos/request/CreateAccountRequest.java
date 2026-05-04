@@ -7,4 +7,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class CreateAccountRequest {
     private String accountName;
+    private String userId;
 }

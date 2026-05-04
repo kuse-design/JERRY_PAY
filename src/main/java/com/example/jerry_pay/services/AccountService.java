@@ -15,27 +15,35 @@ import java.math.BigDecimal;
 
 @Service
 public class AccountService {
-    private final AccountRepository acccountRepository;
+    private final AccountRepository accountRepository;
     private final UserRepository userRepository;
     private final AccountNumberGenerator generator;
 
-    public  AccountService(AccountRepository accountRepository, UserRepository userRepository,
-                           AccountNumberGenerator generator){
-        this.acccountRepository = accountRepository;
+    public AccountService(AccountRepository accountRepository, UserRepository userRepository,
+                          AccountNumberGenerator generator) {
+        this.accountRepository = accountRepository;
         this.userRepository = userRepository;
         this.generator = generator;
     }
 
-    public AccountResponse CreateAccountRequest(CreateAccountRequest request){
+    public AccountResponse CreateAccountRequest(CreateAccountRequest request) {
         User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new userNotFoundException("User not found");
+                .orElseThrow(() -> new userNotFoundException("User not found"));
 
-                Account account = new Account();
-                account.setBalance(BigDecimal.ZERO);
-                account.setAccountNumber(generator.generate());
-                account.setUser(user);
+        Account account = new Account();
+        account.setBalance(BigDecimal.ZERO);
+        account.setAccountNumber(generator.generate());
+        account.setUser(user);
 
-                Account saved = AccountRepository.save(account);
-;
+        Account saved = accountRepository.save(account);
+        return AccountMapper.toResponse(saved);
+
+            }
+
+    public BigDecimal getBalance(String accountNumber){
+        return findByAccountNumber(accountNumber).getBalance();
     }
-}
+        }
+
+
+

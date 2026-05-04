@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @Document
 public class Account {
-    private Long id;
+    private String id;
     private String accountNumber;
     private BigDecimal balance;
     private AccountStatus status;
