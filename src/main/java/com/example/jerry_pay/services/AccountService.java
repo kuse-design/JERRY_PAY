@@ -10,6 +10,8 @@ import com.example.jerry_pay.exception.userNotFoundException;
 import com.example.jerry_pay.utils.AccountNumberGenerator;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 
 @Service
 public class AccountService {
@@ -29,6 +31,11 @@ public class AccountService {
                 .orElseThrow(() -> new userNotFoundException("User not found");
 
                 Account account = new Account();
+                account.setBalance(BigDecimal.ZERO);
+                account.setAccountNumber(generator.generate());
+                account.setUser(user);
 
+                Account saved = AccountRepository.save(account);
+;
     }
 }
