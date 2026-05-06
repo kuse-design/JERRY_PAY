@@ -15,7 +15,7 @@ public class TransactionService {
     public TransactionService(AccountService accountService, TransactionRepository transactionRepository,
                               NotificationService notificationService){
         this.accountService = accountService;
-        this.transactionRepository = transactionRepository;
+        this.transationRepository = transactionRepository;
         this.notificationService = notificationService;
     }
 
