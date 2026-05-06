@@ -1,0 +1,7 @@
+package com.example.jerry_pay.exception;
+
+public class SuspendedAccountException extends RuntimeException {
+    public SuspendedAccountException(String message) {
+        super(message);
+    }
+}
