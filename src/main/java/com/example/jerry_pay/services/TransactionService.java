@@ -17,7 +17,7 @@ public class TransactionService {
         this.accountService = accountService;
         this.transactionRepository = transactionRepository;
         this.notificationService = notificationService;
-
+    }
 
     public void deposit(String accountNumber, BigDecimal amount){
         Account account = accountService.findAccount(accountNumber);
