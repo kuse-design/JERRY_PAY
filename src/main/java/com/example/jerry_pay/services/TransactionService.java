@@ -14,10 +14,7 @@ public class TransactionService {
 
     public TransactionService(AccountService accountService, TransactionRepos}
 
-    public void deposit(String accountNumber, BigDecimal amount){
-        Account account = accountService.findAccount(accountNumber);
-        account.setBalance(account.getBalance().add(amount));
-        Transaction transaction = new Transaction();
+    public void deposit(String accountNumber, Bi
         transaction.setAmount(amount);
         transaction.setType(TransactionType.CREDIT);
         transaction.setTimestamp(timestamp);
