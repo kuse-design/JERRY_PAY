@@ -12,12 +12,7 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final NotificationService notificationService;
 
-    public TransactionService(AccountService accountService, TransactionRepository transactionRepository,
-                              NotificationService notificationService){
-        this.accountService = accountService;
-        this.transactionRepository = transactionRepository;
-        this.notificationService = notificationService;
-    }
+    public TransactionService(AccountService accountService, TransactionRepos}
 
     public void deposit(String accountNumber, BigDecimal amount){
         Account account = accountService.findAccount(accountNumber);
