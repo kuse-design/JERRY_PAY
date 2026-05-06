@@ -12,7 +12,7 @@ public class Transaction {
     private Long id;
     private TransactionType type;
     private BigDecimal amount;
-    private String reference;
+//    private String reference;
     private LocalDateTime timestamp;
 
 }
