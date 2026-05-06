@@ -2,7 +2,6 @@ package com.example.jerry_pay.services;
 
 import com.example.jerry_pay.data.models.Account;
 import com.example.jerry_pay.data.models.Notification;
-import com.example.jerry_pay.data.models.User;
 import com.example.jerry_pay.data.models.notificationType;
 import com.example.jerry_pay.data.repositories.NotificationRepository;
 import org.springframework.stereotype.Service;
