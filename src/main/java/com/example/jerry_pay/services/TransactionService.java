@@ -6,9 +6,12 @@ import com.example.jerry_pay.data.models.TransactionDirection;
 import com.example.jerry_pay.data.repositories.TransactionRepository;
 import com.example.jerry_pay.exception.InsufficientBalanceException;
 import com.example.jerry_pay.exception.InvalidPinException;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Service
 public class TransactionService {
     private final AccountService accountService;
     private final TransactionRepository transactionRepository;
