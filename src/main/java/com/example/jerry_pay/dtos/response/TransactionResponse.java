@@ -10,4 +10,5 @@ public class TransactionResponse {
     private String type;
     private BigDecimal amount;
     private LocalDateTime timestamp;
+
 }
