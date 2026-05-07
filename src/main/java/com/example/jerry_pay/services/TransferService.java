@@ -3,12 +3,12 @@ package com.example.jerry_pay.services;
 import com.example.jerry_pay.data.models.Account;
 import com.example.jerry_pay.data.models.Transaction;
 import com.example.jerry_pay.data.models.TransactionType;
-import com.example.jerry_pay.data.models.NotificationType;
 import com.example.jerry_pay.data.repositories.TransactionRepository;
 import com.example.jerry_pay.dtos.response.TransactionResponse;
-import com.example.jerry_pay.utils.AppMapper;
+//import com.example.jerry_pay.utils.AppMapper;
+import com.example.jerry_pay.exception.InsufficientBalanceException;
+import com.example.jerry_pay.exception.InvalidPinException;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -35,11 +35,11 @@ public class TransferService {
         Account receiver = accountService.findAccount(receiverAcc);
 
         if (!sender.getUser().getPin().equals(pin)) {
-            throw new RuntimeException("Invalid PIN");
+            throw new InvalidPinException("Invalid PIN");
         }
 
         if (sender.getBalance().compareTo(amount) < 0) {
-            throw new RuntimeException("Insufficient funds");
+            throw new InsufficientBalanceException("Insufficient funds");
         }
 
         sender.setBalance(sender.getBalance().subtract(amount));
@@ -48,19 +48,15 @@ public class TransferService {
         Transaction transaction = new Transaction();
 
         transaction.setAmount(amount);
-        transaction.setType(TransactionType.TRANSFER);
-
+        transaction.setTypes(TransactionType.TRANSFER);
         transaction.setSenderAccount(sender);
         transaction.setReceiverAccount(receiver);
-
         transaction.setTimestamp(LocalDateTime.now());
-
         Transaction saved = transactionRepository.save(transaction);
 
-        notificationService.notify(sender, amount, NotificationType.DEBIT);
+        notificationService.sendDebitAlert(sender, amount);
+        notificationService.sendCreditAlert(receiver, amount);
 
-        notificationService.notify(receiver, amount, NotificationType.CREDIT);
-
-        return AppMapper.toTransactionResponse(saved);
+//        return AppMapper.toTransactionResponse(saved);
+         }
     }
-}

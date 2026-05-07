@@ -18,10 +18,14 @@ public class AccountNumberGenerator {
         String accountNumber;
 
         do {
-            int number = ThreadLocalRandom.current()
-                    .nextInt(10000000, 100000000);
 
-            accountNumber = "22" + number;
+            StringBuilder builder = new StringBuilder("22");
+
+            for (int count = 0; count < 8; count++) {
+                builder.append(ThreadLocalRandom.current().nextInt(10));
+            }
+
+            accountNumber = builder.toString();
 
         } while (accountRepository.existsByAccountNumber(accountNumber));
 

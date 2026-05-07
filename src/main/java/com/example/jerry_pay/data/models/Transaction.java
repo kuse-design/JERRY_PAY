@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class Transaction {
     private Long id;
     private TransactionDirection type;
+    private TransactionType Types;
     private BigDecimal amount;
     private Account senderAccount;
     private Account receiverAccount;

@@ -1,5 +1,5 @@
 package com.example.jerry_pay.data.models;
 
-public enum notificationType {
+public enum NotificationType {
     CREDIT, DEBIT;
 }

@@ -11,7 +11,7 @@ public class Notification {
     private BigDecimal Amount;
     private String message;
     private LocalDateTime timeStamp;
-    private notificationType type;
+    private NotificationType type;
     private User user;
 
 }
