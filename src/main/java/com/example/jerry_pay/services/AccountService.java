@@ -9,9 +9,10 @@ import com.example.jerry_pay.dtos.request.CreateAccountRequest;
 import com.example.jerry_pay.dtos.response.AccountResponse;
 import com.example.jerry_pay.exception.*;
 import com.example.jerry_pay.utils.AccountNumberGenerator;
+import com.example.jerry_pay.utils.Mapper;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 @Service
@@ -27,18 +28,30 @@ public class AccountService {
         this.generator = generator;
     }
 
-    public AccountResponse CreateAccountRequest(CreateAccountRequest request) {
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new userNotFoundException("User not found"));
+    public AccountResponse createAccount(CreateAccountRequest request) {
+        User user = new User();
+        user.setAccountName(request.getAccountName());
+        user.setEmail(request.getEmail());
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setAge(request.getAge());
+        user.setPin(request.getPin());
+        user.setCreatedAt(LocalDateTime.now());
+
+        User savedUser = userRepository.save(user);
 
         Account account = new Account();
         account.setBalance(BigDecimal.ZERO);
         account.setAccountNumber(generator.generate());
-        account.setUser(user);
+        account.setStatus(AccountStatus.ACTIVE);
+        account.setCreatedAt(LocalDateTime.now());
+        account.setUser(savedUser);
 
         Account saved = accountRepository.save(account);
-        return AccountMapper.toResponse(saved);
+        return Mapper.toResponse(saved);
+    }
 
+    public Account saveAccount(Account account) {
+        return accountRepository.save(account);
     }
 
     public  Account findAccount(String accountNumber) {
@@ -50,12 +63,9 @@ public class AccountService {
         return account;
     }
 
-    public BigDecimal getBalance(String accountNumber, String pin) {
+    public BigDecimal getBalance(String accountNumber) {
 
         Account account = findAccount(accountNumber);
-        if (!account.getUser().getPin().equals(pin)) {
-            throw new InvalidPinException("Invalid PIN");
-        }
         return account.getBalance();
     }
 

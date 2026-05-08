@@ -8,9 +8,8 @@ import java.time.LocalDateTime;
 @Data
 @Document
 public class Transaction {
-    private Long id;
-    private TransactionDirection type;
-    private TransactionType Types;
+    private String id;
+    private TransactionType Type;
     private BigDecimal amount;
     private Account senderAccount;
     private Account receiverAccount;

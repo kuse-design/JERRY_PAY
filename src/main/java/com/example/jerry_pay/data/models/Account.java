@@ -16,5 +16,4 @@ public class Account {
     private LocalDateTime createdAt;
     private User user;
 
-
 }

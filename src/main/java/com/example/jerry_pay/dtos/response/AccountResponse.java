@@ -7,10 +7,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
+
 public class AccountResponse {
     private String accountNumber;
     private String accountName;
     private BigDecimal balance;
-    private AccountStatus Status;
-    private LocalDateTime CreatedAt;
 }

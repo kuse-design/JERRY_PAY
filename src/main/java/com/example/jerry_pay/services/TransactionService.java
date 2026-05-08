@@ -2,7 +2,7 @@ package com.example.jerry_pay.services;
 
 import com.example.jerry_pay.data.models.Account;
 import com.example.jerry_pay.data.models.Transaction;
-import com.example.jerry_pay.data.models.TransactionDirection;
+import com.example.jerry_pay.data.models.TransactionType;
 import com.example.jerry_pay.data.repositories.TransactionRepository;
 import com.example.jerry_pay.exception.InsufficientBalanceException;
 import com.example.jerry_pay.exception.InvalidPinException;
@@ -29,9 +29,12 @@ public class TransactionService {
 
         accountService.validateAccount(account);
         account.setBalance(account.getBalance().add(amount));
+        accountService.saveAccount(account);
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
-        transaction.setType(TransactionDirection.CREDIT);
+        transaction.setType(TransactionType.CREDIT);
+        transaction.setSenderAccount(null);
+        transaction.setReceiverAccount(account);
         transaction.setTimestamp(LocalDateTime.now());;
         transactionRepository.save(transaction);
         notificationService.sendCreditAlert(account, amount);
@@ -49,9 +52,12 @@ public class TransactionService {
         }
 
         account.setBalance(account.getBalance().subtract(amount));
+        accountService.saveAccount(account);
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
-        transaction.setType(TransactionDirection.DEBIT);
+        transaction.setType(TransactionType.DEBIT);
+        transaction.setSenderAccount(null);
+        transaction.setReceiverAccount(account);
         transaction.setTimestamp(LocalDateTime.now());
         transactionRepository.save(transaction);
         notificationService.sendDebitAlert(account, amount);

@@ -1,11 +1,13 @@
 package com.example.jerry_pay.dtos.request;
 
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document
+
 public class CreateAccountRequest {
     private String accountName;
-    private String userId;
+    private String email;
+    private String phoneNumber;
+    private int age;
+    private String pin;
 }

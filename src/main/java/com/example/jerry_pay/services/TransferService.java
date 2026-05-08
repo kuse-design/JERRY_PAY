@@ -5,9 +5,9 @@ import com.example.jerry_pay.data.models.Transaction;
 import com.example.jerry_pay.data.models.TransactionType;
 import com.example.jerry_pay.data.repositories.TransactionRepository;
 import com.example.jerry_pay.dtos.response.TransactionResponse;
-//import com.example.jerry_pay.utils.AppMapper;
 import com.example.jerry_pay.exception.InsufficientBalanceException;
 import com.example.jerry_pay.exception.InvalidPinException;
+import com.example.jerry_pay.utils.Mapper;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -48,7 +48,7 @@ public class TransferService {
         Transaction transaction = new Transaction();
 
         transaction.setAmount(amount);
-        transaction.setTypes(TransactionType.TRANSFER);
+        transaction.setType(TransactionType.TRANSFER);
         transaction.setSenderAccount(sender);
         transaction.setReceiverAccount(receiver);
         transaction.setTimestamp(LocalDateTime.now());
@@ -56,7 +56,6 @@ public class TransferService {
 
         notificationService.sendDebitAlert(sender, amount);
         notificationService.sendCreditAlert(receiver, amount);
-
-//        return AppMapper.toTransactionResponse(saved);
+                return Mapper.toTransactionResponse(saved);
          }
     }

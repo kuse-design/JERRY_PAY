@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 public class TransferRequest {
     private String fromAccount;
     private String toAccount;
+    private String senderAccountNumber;
+    private String receiverAccountNumber;
     private BigDecimal amount;
     private String pin;
 }

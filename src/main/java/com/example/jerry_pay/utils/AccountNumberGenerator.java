@@ -24,7 +24,6 @@ public class AccountNumberGenerator {
             for (int count = 0; count < 8; count++) {
                 builder.append(ThreadLocalRandom.current().nextInt(10));
             }
-
             accountNumber = builder.toString();
 
         } while (accountRepository.existsByAccountNumber(accountNumber));

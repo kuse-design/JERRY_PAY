@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 @Data
 @Document
 public class User {
-
     private String id;
     private String pin;
     private String accountName;
@@ -15,7 +14,4 @@ public class User {
     private String phoneNumber;
     private int age;
     private LocalDateTime createdAt;
-
-
-
 }
